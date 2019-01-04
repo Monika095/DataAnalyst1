@@ -1,0 +1,34 @@
+import pandas as pd
+import datetime
+import pandas_datareader.data as web
+
+
+start = datetime.datetime(2010, 1, 1)
+end = datetime.datetime.now()
+
+#we can create a dataframe:
+df = web.DataReader("MMM", "robinhood", start, end)
+print(df.head())
+
+df.reset_index(inplace=True)
+df.set_index("begins_at", inplace=True)
+df = df.drop("symbol", axis=1)
+
+print(df.head())
+
+#Data Visualization:
+
+import matplotlib.pyplot as plt
+from matplotlib import style
+
+style.use('fivethirtyeight')
+
+df.close_price = pd.to_numeric(df.close_price)
+df['close_price'].plot()
+plt.legend()
+plt.show()
+
+df.high_price = pd.to_numeric(df.high_price)
+df['high_price'].plot()
+plt.legend()
+plt.show()
