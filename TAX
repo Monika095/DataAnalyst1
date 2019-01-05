@@ -1,0 +1,18 @@
+def tax(x):
+    if round(x) < 0:
+        print("income must be greater than 0")
+    if 0.0 < round(x + 0.01) <= 8000.0:  #I'm add 0.1 because of problems with approximation
+        print("zero")
+    if 8000.0 < round(x + 0.01) <= 13000.0:
+        x = x * 0.18 - (1440 - 883.98 * (x - 8000)/5000)
+        print(round(x))
+    if 13000.0 < round(x + 0.01) <= 85528.0:
+        x = x * 0.18 - 556.02
+        print(round(x))
+    if 85528.0 < round(x + 0.01) <= 127000.0:
+        x = 15395.04 + (x-85528.0) * 0.32 - (556.02 - 556.02 * (x - 85528)/41472)
+        print(round(x))
+    if round(x + 0.01) > 127000.0:
+        x = 15395.04 +((x - 85528.0) * 0.32)
+        print(round(x))
+    return
